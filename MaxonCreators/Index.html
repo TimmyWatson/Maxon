@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maxon Creators - Disney Magic & 3D Animation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --gold-color: #ffd700;
+            --text-light: #ffffff;
+            --text-gray: #b0b0b0;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .glass-morphism {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(20px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--gold-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold-color);
+            transform: translateY(-2px);
+        }
+
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--glass-border);
+            padding: 20px;
+            transition: right 0.3s ease;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .admin-panel.active {
+            right: 0;
+        }
+
+        .admin-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--gold-color);
+            color: var(--primary-color);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 2001;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--gold-color), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--gold-color), #ffed4a);
+            color: var(--primary-color);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            color: var(--gold-color);
+        }
+
+        /* Video Gallery */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .video-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+            border-radius: 15px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-thumbnail::before {
+            content: '\f04b';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+
+        .premium-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+        }
+
+        .premium-text {
+            background: var(--gold-color);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        /* 3D Models */
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .model-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .model-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .model-preview {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(45deg, var(--accent-color), var(--gold-color));
+            border-radius: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--text-light);
+        }
+
+        /* Subscription Plans */
+        .plans-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .plan-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .plan-card:hover::before {
+            left: 100%;
+        }
+
+        .plan-card:hover {
+            transform: scale(1.05);
+            border-color: var(--gold-color);
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            color: var(--gold-color);
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gold-color);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold-color);
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .admin-panel {
+                width: 100vw;
+                right: -100vw;
+            }
+            
+            .section {
+                padding: 50px 0;
+            }
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .language-switcher select {
+            background: var(--glass-bg);
+            color: var(--text-light);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 10px;
+            backdrop-filter: blur(20px);
+        }
+
+        /* Upload Areas */
+        .upload-area {
+            border: 2px dashed var(--glass-border);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: var(--gold-color);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .upload-area.dragover {
+            border-color: var(--gold-color);
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        /* Video Player */
+        .video-player {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-player-content {
+            max-width: 90%;
+            max-height: 90%;
+            background: var(--glass-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .video-player video {
+            width: 100%;
+            height: auto;
+        }
+
+        .close-player {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        /* News Section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .news-date {
+            color: var(--gold-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .subscribe-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 20px 10px;
+        }
+
+        .subscribe-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .subscribe-button.subscribed {
+            background: linear-gradient(45deg, #4CAF50, #66BB6A);
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Toggle -->
+    <button class="admin-toggle" onclick="toggleAdmin()" title="Admin Panel">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <h3 style="color: var(--gold-color); margin-bottom: 20px;">Admin Panel</h3>
+        
+        <!-- Site Settings -->
+        <div style="margin-bottom: 30px;">
+            <h4 style="color: var(--text-light); margin-bottom: 15px;">Site Settings</h4>
+            <div class="form-group">
+                <label>Site Title</label>
+                <input type="text" id="siteTitle" value="Maxon Creators">
+            </div>
+            <div class="form-group">
+                <label>Hero Title</label>
+                <input type="text" id="heroTitle" value="Welcome to Maxon Creators">
+            </div>
+            <div class="form-group">
+                <label>Hero Description</label>
+                <textarea id="heroDescription" rows="3">Experience the magic of Disney, DreamWorks, Pixar and more through stunning 3D animations and exclusive content.</textarea>
+            </div>
+        </div>
+
+        <!-- Upload Content -->
+        <div style="margin-bottom: 30px;">
+            <h4 style="color: var(--text-light); margin-bottom: 15px;">Upload Content</h4>
+            <div class="upload-area" onclick="document.getElementById('videoUpload').click()">
+                <i class="fas fa-video" style="font-size: 2rem; margin-bottom: 10px; color: var(--gold-color);"></i>
+                <p>Upload Video (up to 4K)</p>
+                <input type="file" id="videoUpload" accept="video/*" style="display: none;" onchange="handleVideoUpload(this)">
+            </div>
+            
+            <div class="upload-area" onclick="document.getElementById('modelUpload').click()">
+                <i class="fas fa-cube" style="font-size: 2rem; margin-bottom: 10px; color: var(--gold-color);"></i>
+                <p>Upload 3D Model (.c4d, .fbx + textures)</p>
+                <input type="file" id="modelUpload" accept=".c4d,.fbx,.zip,.rar" style="display: none;" onchange="handleModelUpload(this)">
+            </div>
+
+            <div class="upload-area" onclick="document.getElementById('imageUpload').click()">
+                <i class="fas fa-image" style="font-size: 2rem; margin-bottom: 10px; color: var(--gold-color);"></i>
+                <p>Upload Images for Design</p>
+                <input type="file" id="imageUpload" accept="image/*" multiple style="display: none;" onchange="handleImageUpload(this)">
+            </div>
+        </div>
+
+        <!-- PayPal Settings -->
+        <div style="margin-bottom: 30px;">
+            <h4 style="color: var(--text-light); margin-bottom: 15px;">PayPal Settings</h4>
+            <div class="form-group">
+                <label>PayPal Client ID</label>
+                <input type="text" id="paypalClientId" placeholder="Enter your PayPal Client ID">
+            </div>
+            <button class="cta-button" onclick="updatePayPalConfig()" style="width: 100%; margin-bottom: 10px;">Update PayPal Config</button>
+        </div>
+
+        <!-- Pricing Settings -->
+        <div style="margin-bottom: 30px;">
+            <h4 style="color: var(--text-light); margin-bottom: 15px;">Pricing Settings</h4>
+            <div class="form-group">
+                <label>Video Access Price ($)</label>
+                <input type="number" id="videoPrice" value="3.50" step="0.01">
+            </div>
+            <div class="form-group">
+                <label>Combo Plan Price ($)</label>
+                <input type="number" id="comboPrice" value="10.00" step="0.01">
+            </div>
+        </div>
+
+        <!-- News Management -->
+        <div style="margin-bottom: 30px;">
+            <h4 style="color: var(--text-light); margin-bottom: 15px;">Add News</h4>
+            <div class="form-group">
+                <label>News Title</label>
+                <input type="text" id="newsTitle" placeholder="News title">
+            </div>
+            <div class="form-group">
+                <label>News Content</label>
+                <textarea id="newsContent" rows="4" placeholder="News content"></textarea>
+            </div>
+            <button class="cta-button" onclick="addNews()">Add News</button>
+        </div>
+
+        <button class="cta-button" onclick="saveSettings()" style="width: 100%; margin-top: 20px;">Save Settings</button>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Maxon Creators</a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#models">3D Models</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 id="heroTitleDisplay">Welcome to Maxon Creators</h1>
+            <p id="heroDescriptionDisplay">Experience the magic of Disney, DreamWorks, Pixar and more through stunning 3D animations and exclusive content.</p>
+            <button class="subscribe-button" onclick="toggleSubscription()" id="subscribeBtn">
+                <i class="fas fa-bell"></i> Subscribe
+            </button>
+            <a href="#videos" class="cta-button">Explore Content</a>
+        </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section class="section" id="videos">
+        <h2 data-translate="videos-title">Premium Video Collection</h2>
+        <div class="video-grid" id="videoGrid">
+            <!-- Sample Videos -->
+            <div class="video-card" onclick="showSubscriptionModal()">
+                <div class="video-thumbnail">
+                    <div class="premium-overlay">
+                        <div class="premium-text">Premium Content</div>
+                    </div>
+                </div>
+                <h3>Disney Logo Animation</h3>
+                <p>Magical 3D recreation of the iconic Disney castle</p>
+            </div>
+            
+            <div class="video-card" onclick="showSubscriptionModal()">
+                <div class="video-thumbnail">
+                    <div class="premium-overlay">
+                        <div class="premium-text">Premium Content</div>
+                    </div>
+                </div>
+                <h3>Pixar Intro Recreation</h3>
+                <p>Stunning 3D animation of the Pixar lamp</p>
+            </div>
+            
+            <div class="video-card" onclick="showSubscriptionModal()">
+                <div class="video-thumbnail">
+                    <div class="premium-overlay">
+                        <div class="premium-text">Premium Content</div>
+                    </div>
+                </div>
+                <h3>20th Century Fox</h3>
+                <p>Epic recreation of the classic intro</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Models Section -->
+    <section class="section" id="models">
+        <h2 data-translate="models-title">3D Models Collection</h2>
+        <div class="model-grid" id="modelGrid">
+            <!-- Sample Models -->
+            <div class="model-card">
+                <div class="model-preview">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <h3>Disney Castle Model</h3>
+                <p>High-quality 3D model with textures</p>
+                <p style="color: var(--gold-color); font-weight: bold;">$15.00</p>
+                <button class="cta-button" onclick="purchaseModel('disney-castle', 15.00)">Purchase</button>
+            </div>
+            
+            <div class="model-card">
+                <div class="model-preview">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Pixar Lamp Model</h3>
+                <p>Detailed 3D model with rigging</p>
+                <p style="color: var(--gold-color); font-weight: bold;">$12.00</p>
+                <button class="cta-button" onclick="purchaseModel('pixar-lamp', 12.00)">Purchase</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section" id="pricing">
+        <h2 data-translate="pricing-title">Subscription Plans</h2>
+        <div class="plans-container">
+            <div class="plan-card">
+                <h3>A World of Wonders with Maxon Creators</h3>
+                <div class="plan-price" id="videoPlanPrice">$3.50</div>
+                <p>Monthly video access</p>
+                <ul style="text-align: left; margin: 20px 0;">
+                    <li>• Unlimited video streaming</li>
+                    <li>• 4K quality content</li>
+                    <li>• New content weekly</li>
+                    <li>• Mobile & desktop access</li>
+                </ul>
+                <button class="cta-button" onclick="subscribeToPlan('video', 3.50)">Subscribe Now</button>
+            </div>
+            
+            <div class="plan-card">
+                <h3>MaxonCreators Magic Combo</h3>
+                <div class="plan-price" id="comboPlanPrice">$10.00</div>
+                <p>Videos + 3D Models</p>
+                <ul style="text-align: left; margin: 20px 0;">
+                    <li>• Everything in video plan</li>
+                    <li>• Free 3D model downloads</li>
+                    <li>• Source files included</li>
+                    <li>• Priority support</li>
+                </ul>
+                <button class="cta-button" onclick="subscribeToPlan('combo', 10.00)">Subscribe Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="section" id="news">
+        <h2 data-translate="news-title">Latest News</h2>
+        <div class="news-grid" id="newsGrid">
+            <!-- Sample News -->
+            <div class="news-card">
+                <div class="news-date">August 13, 2025</div>
+                <h3>New Disney Collection Released</h3>
+                <p>We've just released 5 new Disney logo animations in stunning 4K quality. Check out the magical recreations of your favorite Disney classics.</p>
+            </div>
+            
+            <div class="news-card">
+                <div class="news-date">August 10, 2025</div>
+                <h3>3D Model Store Now Open</h3>
+                <p>Our 3D model store is now live! Download high-quality models with textures and source files. Perfect for your own projects.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 data-translate="contact-title">Contact Me</h2>
+        <form class="contact-form" onsubmit="sendContactForm(event)">
+            <div class="form-group">
+                <label for="contactName">Name</label>
+                <input type="text" id="contactName" required>
+            </div>
+            <div class="form-group">
+                <label for="contactEmail">Email</label>
+                <input type="email" id="contactEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="contactMessage">Message</label>
+                <textarea id="contactMessage" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="cta-button" style="width: 100%;">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Maxon Creators. All rights reserved.</p>
+        <p>Creating magical 3D experiences since 2020</p>
+    </footer>
+
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <select onchange="changeLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+        </select>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div class="video-player" id="videoPlayer">
+        <div class="video-player-content">
+            <button class="close-player" onclick="closeVideoPlayer()">&times;</button>
+            <video controls id="videoElement">
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <!-- PayPal SDK будет загружен после настройки -->
+    <script>
+        // PayPal SDK будет загружен динамически при настройке
+        window.paypalConfig = {
+            clientId: 'YOUR_PAYPAL_CLIENT_ID', // Замените на ваш Client ID
+            currency: 'USD'
+        };
+    </script>
+
+    <script>
+        // Global variables
+        let isSubscribed = false;
+        let currentLanguage = 'en';
+        let userSubscriptions = [];
+        let uploadedContent = {
+            videos: [],
+            models: [],
+            images: []
+        };
+
+        // Translations
+        const translations = {
+            en: {
+                'videos-title': 'Premium Video Collection',
+                'models-title': '3D Models Collection',
+                'pricing-title': 'Subscription Plans',
+                'news-title': 'Latest News',
+                'contact-title': 'Contact Me'
+            },
+            ru: {
+                'videos-title': 'Премиум коллекция видео',
+                'models-title': 'Коллекция 3D моделей',
+                'pricing-title': 'Тарифные планы',
+                'news-title': 'Последние новости',
+                'contact-title': 'Связаться со мной'
+            }
+        };
+
+        // Initialize site
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Load saved settings
+            loadSettings();
+            loadPayPalConfig();
+            
+            // Setup drag and drop for uploads
+            setupDragAndDrop();
+            
+            // Initialize PayPal buttons containers (будут созданы при первом использовании)
+            initializePayPalContainers();
+        });
+
+        function initializePayPalContainers() {
+            // Создаем контейнеры для PayPal кнопок только когда они нужны
+            const videoPlan = document.querySelector('.plan-card:first-child .cta-button');
+            const comboPlan = document.querySelector('.plan-card:last-child .cta-button');
+            
+            if (videoPlan && !document.getElementById('paypal-button-container-video')) {
+                videoPlan.insertAdjacentHTML('afterend', '<div id="paypal-button-container-video" style="margin-top: 10px; display: none;"></div>');
+            }
+            if (comboPlan && !document.getElementById('paypal-button-container-combo')) {
+                comboPlan.insertAdjacentHTML('afterend', '<div id="paypal-button-container-combo" style="margin-top: 10px; display: none;"></div>');
+            }
+        }
+
+        // Admin Panel Functions
+        function toggleAdmin() {
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('active');
+        }
+
+        function saveSettings() {
+            const settings = {
+                siteTitle: document.getElementById('siteTitle').value,
+                heroTitle: document.getElementById('heroTitle').value,
+                heroDescription: document.getElementById('heroDescription').value,
+                videoPrice: parseFloat(document.getElementById('videoPrice').value),
+                comboPrice: parseFloat(document.getElementById('comboPrice').value)
+            };
+
+            // Save to memory (in real implementation, this would go to a database)
+            localStorage.setItem('maxonSettings', JSON.stringify(settings));
+            
+            // Apply settings
+            document.title = settings.siteTitle + ' - Disney Magic & 3D Animation';
+            document.getElementById('heroTitleDisplay').textContent = settings.heroTitle;
+            document.getElementById('heroDescriptionDisplay').textContent = settings.heroDescription;
+            document.getElementById('videoPlanPrice').textContent = '
+
+         + settings.videoPrice.toFixed(2);
+            document.getElementById('comboPlanPrice').textContent = '
+
+         + settings.comboPrice.toFixed(2);
+
+            alert('Settings saved successfully!');
+            toggleAdmin();
+        }
+
+        function loadSettings() {
+            const saved = localStorage.getItem('maxonSettings');
+            if (saved) {
+                const settings = JSON.parse(saved);
+                document.getElementById('siteTitle').value = settings.siteTitle || 'Maxon Creators';
+                document.getElementById('heroTitle').value = settings.heroTitle || 'Welcome to Maxon Creators';
+                document.getElementById('heroDescription').value = settings.heroDescription || 'Experience the magic of Disney, DreamWorks, Pixar and more through stunning 3D animations and exclusive content.';
+                document.getElementById('videoPrice').value = settings.videoPrice || 3.50;
+                document.getElementById('comboPrice').value = settings.comboPrice || 10.00;
+                
+                // Apply loaded settings
+                document.title = settings.siteTitle + ' - Disney Magic & 3D Animation';
+                document.getElementById('heroTitleDisplay').textContent = settings.heroTitle;
+                document.getElementById('heroDescriptionDisplay').textContent = settings.heroDescription;
+                document.getElementById('videoPlanPrice').textContent = '
+
+         + (settings.videoPrice || 3.50).toFixed(2);
+                document.getElementById('comboPlanPrice').textContent = '
+
+         + (settings.comboPrice || 10.00).toFixed(2);
+            }
+        }
+
+        // Upload Functions
+        function handleVideoUpload(input) {
+            const file = input.files[0];
+            if (file) {
+                // Validate file size and type
+                if (file.size > 2000000000) { // 2GB limit for 4K videos
+                    alert('File too large. Maximum size is 2GB.');
+                    return;
+                }
+                
+                const videoData = {
+                    id: Date.now(),
+                    name: file.name,
+                    size: file.size,
+                    type: file.type,
+                    file: file,
+                    uploadDate: new Date().toISOString()
+                };
+                
+                uploadedContent.videos.push(videoData);
+                addVideoToGrid(videoData);
+                alert('Video uploaded successfully!');
+            }
+        }
+
+        function handleModelUpload(input) {
+            const file = input.files[0];
+            if (file) {
+                const modelData = {
+                    id: Date.now(),
+                    name: file.name,
+                    size: file.size,
+                    type: file.type,
+                    file: file,
+                    uploadDate: new Date().toISOString(),
+                    price: 15.00 // Default price
+                };
+                
+                uploadedContent.models.push(modelData);
+                addModelToGrid(modelData);
+                alert('3D Model uploaded successfully!');
+            }
+        }
+
+        function handleImageUpload(input) {
+            const files = input.files;
+            for (let file of files) {
+                const imageData = {
+                    id: Date.now() + Math.random(),
+                    name: file.name,
+                    file: file,
+                    uploadDate: new Date().toISOString()
+                };
+                
+                uploadedContent.images.push(imageData);
+            }
+            alert(`${files.length} image(s) uploaded successfully!`);
+        }
+
+        function addVideoToGrid(videoData) {
+            const videoGrid = document.getElementById('videoGrid');
+            const videoCard = document.createElement('div');
+            videoCard.className = 'video-card';
+            videoCard.onclick = () => playVideo(videoData);
+            
+            videoCard.innerHTML = `
+                <div class="video-thumbnail">
+                    ${!userSubscriptions.includes('video') && !userSubscriptions.includes('combo') ? 
+                        '<div class="premium-overlay"><div class="premium-text">Premium Content</div></div>' : ''
+                    }
+                </div>
+                <h3>${videoData.name}</h3>
+                <p>Uploaded: ${new Date(videoData.uploadDate).toLocaleDateString()}</p>
+            `;
+            
+            videoGrid.appendChild(videoCard);
+        }
+
+        function addModelToGrid(modelData) {
+            const modelGrid = document.getElementById('modelGrid');
+            const modelCard = document.createElement('div');
+            modelCard.className = 'model-card';
+            
+            modelCard.innerHTML = `
+                <div class="model-preview">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <h3>${modelData.name}</h3>
+                <p>Uploaded: ${new Date(modelData.uploadDate).toLocaleDateString()}</p>
+                <p style="color: var(--gold-color); font-weight: bold;">${modelData.price.toFixed(2)}</p>
+                <button class="cta-button" onclick="purchaseModel('${modelData.id}', ${modelData.price})">Purchase</button>
+            `;
+            
+            modelGrid.appendChild(modelCard);
+        }
+
+        function setupDragAndDrop() {
+            const uploadAreas = document.querySelectorAll('.upload-area');
+            
+            uploadAreas.forEach(area => {
+                area.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    area.classList.add('dragover');
+                });
+                
+                area.addEventListener('dragleave', () => {
+                    area.classList.remove('dragover');
+                });
+                
+                area.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    area.classList.remove('dragover');
+                    
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        const input = area.querySelector('input[type="file"]');
+                        input.files = files;
+                        input.dispatchEvent(new Event('change'));
+                    }
+                });
+            });
+        }
+
+        // Subscription Functions
+        function toggleSubscription() {
+            const btn = document.getElementById('subscribeBtn');
+            isSubscribed = !isSubscribed;
+            
+            if (isSubscribed) {
+                btn.innerHTML = '<i class="fas fa-bell-slash"></i> Subscribed';
+                btn.classList.add('subscribed');
+            } else {
+                btn.innerHTML = '<i class="fas fa-bell"></i> Subscribe';
+                btn.classList.remove('subscribed');
+            }
+        }
+
+        function subscribeToPlan(planType, price) {
+            // Проверяем загружен ли PayPal SDK
+            if (typeof paypal === 'undefined') {
+                loadPayPalSDK(() => {
+                    createPayPalButton(planType, price);
+                });
+            } else {
+                createPayPalButton(planType, price);
+            }
+        }
+
+        function createPayPalButton(planType, price) {
+            try {
+                paypal.Buttons({
+                    createOrder: function(data, actions) {
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: price.toFixed(2)
+                                }
+                            }]
+                        });
+                    },
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(details) {
+                            userSubscriptions.push(planType);
+                            alert('Subscription activated! Welcome to ' + (planType === 'video' ? 'A World of Wonders' : 'MaxonCreators Magic Combo'));
+                            
+                            // Remove premium overlays if subscribed
+                            if (planType === 'video' || planType === 'combo') {
+                                const overlays = document.querySelectorAll('.premium-overlay');
+                                overlays.forEach(overlay => overlay.remove());
+                            }
+                            
+                            // Send confirmation email (simulated)
+                            sendSubscriptionEmail(details.payer.email_address, planType);
+                        });
+                    },
+                    onError: function(err) {
+                        console.error('PayPal Error:', err);
+                        alert('Payment failed. Please try again.');
+                    }
+                }).render('#paypal-button-container-' + planType);
+            } catch (error) {
+                console.error('PayPal Button Error:', error);
+                // Fallback - показать альтернативный способ оплаты
+                showAlternativePayment(planType, price);
+            }
+        }
+
+        function loadPayPalSDK(callback) {
+            if (window.paypalConfig.clientId === 'YOUR_PAYPAL_CLIENT_ID') {
+                alert('PayPal not configured. Please set up your PayPal Client ID in admin settings.');
+                return;
+            }
+            
+            const script = document.createElement('script');
+            script.src = `https://www.paypal.com/sdk/js?client-id=${window.paypalConfig.clientId}&currency=${window.paypalConfig.currency}`;
+            script.onload = callback;
+            script.onerror = function() {
+                console.error('Failed to load PayPal SDK');
+                showAlternativePayment();
+            };
+            document.head.appendChild(script);
+        }
+
+        function showAlternativePayment(planType, price) {
+            alert(`PayPal is not available. Please contact support for alternative payment methods.\nPlan: ${planType}\nPrice: ${price}`);
+        }
+
+        function showSubscriptionModal() {
+            if (!userSubscriptions.includes('video') && !userSubscriptions.includes('combo')) {
+                alert('This is premium content. Please subscribe to access our video collection!');
+                document.getElementById('pricing').scrollIntoView();
+            }
+        }
+
+        function playVideo(videoData) {
+            if (userSubscriptions.includes('video') || userSubscriptions.includes('combo')) {
+                const player = document.getElementById('videoPlayer');
+                const video = document.getElementById('videoElement');
+                
+                // Create URL for uploaded video
+                const url = URL.createObjectURL(videoData.file);
+                video.src = url;
+                
+                player.style.display = 'flex';
+                video.play();
+            } else {
+                showSubscriptionModal();
+            }
+        }
+
+        function closeVideoPlayer() {
+            const player = document.getElementById('videoPlayer');
+            const video = document.getElementById('videoElement');
+            
+            player.style.display = 'none';
+            video.pause();
+            video.src = '';
+        }
+
+        // Purchase Functions
+        function purchaseModel(modelId, price) {
+            // Проверяем загружен ли PayPal SDK
+            if (typeof paypal === 'undefined') {
+                loadPayPalSDK(() => {
+                    createModelPayPalButton(modelId, price);
+                });
+            } else {
+                createModelPayPalButton(modelId, price);
+            }
+        }
+
+        function createModelPayPalButton(modelId, price) {
+            try {
+                paypal.Buttons({
+                    createOrder: function(data, actions) {
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: price.toFixed(2)
+                                }
+                            }]
+                        });
+                    },
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(details) {
+                            alert('Purchase successful! Download will start automatically.');
+                            downloadModel(modelId);
+                        });
+                    },
+                    onError: function(err) {
+                        console.error('PayPal Error:', err);
+                        alert('Payment failed. Please try again.');
+                    }
+                }).render('#paypal-button-model-' + modelId);
+            } catch (error) {
+                console.error('PayPal Button Error:', error);
+                // Fallback для покупки модели
+                alert(`PayPal not available. Please contact support to purchase this model.\nModel ID: ${modelId}\nPrice: ${price}`);
+            }
+        }
+
+        function downloadModel(modelId) {
+            const model = uploadedContent.models.find(m => m.id == modelId);
+            if (model) {
+                // Create download link
+                const url = URL.createObjectURL(model.file);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = model.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+        }
+
+        // Contact Form
+        function sendContactForm(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const message = document.getElementById('contactMessage').value;
+            
+            // Email simulation (in real implementation, this would use EmailJS or server-side email)
+            const emailData = {
+                to: 'tymmyuotson@mail.ru',
+                from: email,
+                subject: 'New Contact Form Message from ' + name,
+                body: `
+                    Name: ${name}
+                    Email: ${email}
+                    Message: ${message}
+                    
+                    Sent from Maxon Creators website
+                `
+            };
+            
+            // Simulate sending email
+            alert('Message sent successfully! I will get back to you soon.');
+            event.target.reset();
+            
+            console.log('Email would be sent:', emailData);
+        }
+
+        // News Functions
+        function addNews() {
+            const title = document.getElementById('newsTitle').value;
+            const content = document.getElementById('newsContent').value;
+            
+            if (title && content) {
+                const newsCard = document.createElement('div');
+                newsCard.className = 'news-card';
+                newsCard.innerHTML = `
+                    <div class="news-date">${new Date().toLocaleDateString()}</div>
+                    <h3>${title}</h3>
+                    <p>${content}</p>
+                `;
+                
+                const newsGrid = document.getElementById('newsGrid');
+                newsGrid.insertBefore(newsCard, newsGrid.firstChild);
+                
+                // Clear form
+                document.getElementById('newsTitle').value = '';
+                document.getElementById('newsContent').value = '';
+                
+                alert('News added successfully!');
+            }
+        }
+
+        // Language Functions
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update text elements
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Store language preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Utility Functions
+        function sendSubscriptionEmail(email, planType) {
+            const emailData = {
+                to: email,
+                subject: 'Subscription Confirmed - Maxon Creators',
+                body: `
+                    Thank you for subscribing to ${planType === 'video' ? 'A World of Wonders with Maxon Creators' : 'MaxonCreators Magic Combo'}!
+                    
+                    Your subscription is now active and you can access all premium content.
+                    
+                    Welcome to the magical world of 3D animation!
+                    
+                    Best regards,
+                    Maxon Creators Team
+                `
+            };
+            
+            console.log('Subscription email would be sent:', emailData);
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add floating particles effect
+        function createParticles() {
+            const hero = document.querySelector('.hero');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 2px;
+                    height: 2px;
+                    background: rgba(255, 215, 0, 0.5);
+                    border-radius: 50%;
+                    top: ${Math.random() * 100}%;
+                    left: ${Math.random() * 100}%;
+                    animation: float ${3 + Math.random() * 4}s ease-in-out infinite;
+                    animation-delay: ${Math.random() * 2}s;
+                `;
+                hero.appendChild(particle);
+            }
+        }
+
+        // Add CSS for particle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 0;
+                }
+                10%, 90% {
+                    opacity: 1;
+                }
+                50% {
+                    transform: translateY(-20px) rotate(180deg);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize particles when page loads
+        window.addEventListener('load', createParticles);
+
+        // Add PayPal Configuration to Admin Panel
+        function updatePayPalConfig() {
+            const clientId = document.getElementById('paypalClientId')?.value;
+            if (clientId) {
+                window.paypalConfig.clientId = clientId;
+                localStorage.setItem('paypalClientId', clientId);
+                alert('PayPal configuration updated!');
+            }
+        }
+
+        // Load PayPal config from storage
+        function loadPayPalConfig() {
+            const saved = localStorage.getItem('paypalClientId');
+            if (saved) {
+                window.paypalConfig.clientId = saved;
+                const input = document.getElementById('paypalClientId');
+                if (input) input.value = saved;
+            }
+        }
+
+        // Auto-save admin settings
+        setInterval(() => {
+            if (document.getElementById('adminPanel').classList.contains('active')) {
+                const settings = {
+                    siteTitle: document.getElementById('siteTitle').value,
+                    heroTitle: document.getElementById('heroTitle').value,
+                    heroDescription: document.getElementById('heroDescription').value,
+                    videoPrice: parseFloat(document.getElementById('videoPrice').value) || 3.50,
+                    comboPrice: parseFloat(document.getElementById('comboPrice').value) || 10.00
+                };
+                localStorage.setItem('maxonSettingsBackup', JSON.stringify(settings));
+            }
+        }, 30000); // Auto-save every 30 seconds
+
+        // Load preferred language on page load
+        window.addEventListener('load', () => {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang) {
+                const langSelect = document.querySelector('.language-switcher select');
+                langSelect.value = savedLang;
+                changeLanguage(savedLang);
+            }
+        });
+    </script>
+
+    <style>
+        /* PayPal button styling */
+        #paypal-button-container-video,
+        #paypal-button-container-combo {
+            max-width: 300px;
+            margin: 10px auto;
+        }
+        
+        /* Mobile responsiveness improvements */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .plan-card {
+                padding: 20px;
+            }
+            
+            .plan-price {
+                font-size: 2rem;
+            }
+            
+            .contact-form {
+                padding: 20px;
+            }
+            
+            .admin-panel {
+                padding: 15px;
+            }
+        }
+        
+        /* Enhanced animations */
+        .video-card,
+        .model-card,
+        .news-card,
+        .plan-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .video-card:hover,
+        .model-card:hover,
+        .news-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+        
+        /* Loading states */
+        .loading {
+            position: relative;
+            pointer-events: none;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid var(--gold-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</body>
+</html>
+
+        
